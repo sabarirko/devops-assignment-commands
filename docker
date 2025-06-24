@@ -1,0 +1,35 @@
+1 apt update
+    2  apt install docker.io -y
+    3  docker pull ubuntu
+    4  docker run -itd -p 80:80 ubuntu
+    5  docker ps
+    6  docker exec -it fd57e0a0f840 bash
+       1  apt update -y
+       2  apt install apache2 -y
+       3  service apache2 status
+       4  service apache2 start
+       5  service apache2 status
+
+    8 docker ps
+    9  docker commit fd57e0a0f840 myimage1
+   11  docker images
+   12  docker run -itd -p 81:80 myimage1
+   13  docker ps
+   14  docker exec -it 917cb2510152 bash
+
+   16 docker images
+   17  docker tag myimage1 sabarirko/myimage1
+   18  docker images
+   19  docker login
+   20  docker push sabarirko/myimage1
+
+   21 nano Dockerfile
+            FROM ubuntu
+            RUN apt update
+            RUN apt install apache2 -y
+            ADD index.html /var/www/html/
+            ENTRYPOINT apachectl -D FOREGROUND
+   25  docker build . -t newimage
+   26  docker images
+   27  docker run -itd -p 90:80 newimage
+   
